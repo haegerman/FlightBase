@@ -1,6 +1,8 @@
 package se.lexicon.ui;
 
 import se.lexicon.exception.ExampleException;
+import se.lexicon.model.FlightManager;
+import se.lexicon.model.priceConstruction.Price;
 
 import java.util.Scanner;
 
@@ -11,7 +13,8 @@ public class SystemUI {
 
 		// Loop-condition
 		boolean isRunning = true;
-
+		Menu menu = new Menu();
+		FlightManager manager = new FlightManager(menu);
 		// Try-with-resources to auto-close scanner on error or exit
 		try(Scanner scanner = new Scanner(System.in)) {
 
@@ -20,8 +23,9 @@ public class SystemUI {
 
 				// Inner loop error handling
 				try {
+					menu.mainMenue();
 
-					System.out.println("User input : ");
+					//System.out.println("User input : ");
 					String keyboard = scanner.next();
 
 					switch (keyboard) {
@@ -29,6 +33,10 @@ public class SystemUI {
 						case "0":
 							System.out.println("Exiting program...");
 							isRunning = false;
+							break;
+						case "1":
+							manager.bookFlight();
+							isRunning = true;
 							break;
 
 						default:
@@ -57,5 +65,7 @@ public class SystemUI {
 		}
 
 	}
+
+
 
 }
