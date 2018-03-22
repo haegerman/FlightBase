@@ -5,7 +5,7 @@ import se.lexicon.model.priceConstruction.Food;
 public interface FoodTypeInterface {
 
         public double price();
-        public double setPrice();
+        public void setPrice(double price);
 
 }
 

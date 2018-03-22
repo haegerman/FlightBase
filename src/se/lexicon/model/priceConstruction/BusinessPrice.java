@@ -17,7 +17,7 @@ public class BusinessPrice extends Price {
     }
 
     public  BusinessPrice(Food businessClassFood, FoodServiceChoice fsc){
-        super(20000,(fsc.getBreakfast().price() + fsc.getLunchAndDinner().price()),fsc.getBeverage().price());
+        super(20000,(fsc.getBusinessBreakfast().price() + fsc.getBusinessLunchAndDinner().price()),fsc.getBeverage().price());
         this.businessClassFood = businessClassFood;
     }
 

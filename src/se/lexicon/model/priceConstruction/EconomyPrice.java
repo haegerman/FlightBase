@@ -19,7 +19,7 @@ public class EconomyPrice extends Price {
 
 
     public EconomyPrice(Food economyClassFood, FoodServiceChoice fsc) {
-        super(5000,(fsc.getBreakfast().price() + fsc.getLunchAndDinner().price()),fsc.getBeverage().price());
+        super(5000,(fsc.getEconomyBreakfast().price() + fsc.getEconomyLunchAndDinner().price()),fsc.getBeverage().price());
         this.economyClassFood = economyClassFood;
 
     }
