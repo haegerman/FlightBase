@@ -1,10 +1,11 @@
 package se.lexicon.model.foodChoiseBuilder;
 
-import se.lexicon.model.beverage.Beverage;
+
 import se.lexicon.model.types.BreakfastBusiness;
 import se.lexicon.model.types.BreakfastEconomy;
 import se.lexicon.model.types.LunchAndDinnerBusiness;
 import se.lexicon.model.types.LunchAndDinnerEconomy;
+import se.lexicon.model.types.Beverage;
 
 public class FoodServiceChoice {
 	public static class ChoiceBuilder {
@@ -13,6 +14,7 @@ public class FoodServiceChoice {
 		private BreakfastEconomy breakfastE;
 		private LunchAndDinnerEconomy lunchAndDinnerE;
 		private Beverage beverage;
+
 		public ChoiceBuilder() {
 		}
 		
@@ -39,7 +41,11 @@ public class FoodServiceChoice {
 			this.lunchAndDinnerE = lunchAndDinnerEconomy;
 			return this;
 		}
-
+		
+		public ChoiceBuilder beverage(Beverage beverage) {
+			this.beverage = beverage;
+			return this;
+		}
 	}
 	
 	private final BreakfastBusiness breakfastB;

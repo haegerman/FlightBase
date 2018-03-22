@@ -1,19 +1,19 @@
 package se.lexicon.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 import se.lexicon.model.foodChoiseBuilder.FoodServiceChoice;
-import se.lexicon.model.foodChoiseBuilder.FoodServiceChoice.ChoiceBuilder;
 import se.lexicon.model.priceConstruction.PassengerClass;
 import se.lexicon.model.priceConstruction.Price;
+import se.lexicon.model.types.Beverage;
 import se.lexicon.model.types.BreakfastBusiness;
 import se.lexicon.model.types.BreakfastEconomy;
 import se.lexicon.model.types.LunchAndDinnerBusiness;
 import se.lexicon.model.types.LunchAndDinnerEconomy;
 import se.lexicon.ui.Menu;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 public class FlightManager {
 
@@ -23,6 +23,7 @@ public class FlightManager {
 	private boolean isFull;
 	private boolean isFullBusiness, isFullEconomy;
 	private Price price;
+	Beverage beverage;
 	private PassengerClass passengerClass;
 	private Map<String, Integer> reservation; // Name and seat number NOTE: price is related to seat no
 
@@ -89,16 +90,42 @@ public class FlightManager {
 				break;
 			case 2:
 				fixLunchAndDinner(passengerClass);
-				//After adding Breakfast dinner and lunch choices
-				//Build the whole food choice instance.
-				
+
 				FoodServiceChoice foodChoice = foodServiceChoice.build();
 				break;
+
 			}
+			Scanner sc1 = new Scanner(System.in);
+			choice = menu.beverageSelectorMenu();
+			switch (choice) {
+			case 0:
+				System.exit(choice);
+			case 1:
+				//String type = sc1.nextLine();
+				//fixBeverage(beverage.setType(type)));
+				fixBeverage(beverage.NON_ALCHOLIC_BEVERAGE);
+				System.out.println("Will you have alcholic drinc? yes/no");
+				String choise = sc1.nextLine();
+				if(choise.equals("yes"))
+					fixBeverage(Beverage.ALCHOLIC);
+				break;
+			case 2:
+				fixLunchAndDinner(passengerClass);
+				//After adding Breakfast dinner and lunch choices
+				//Build the whole food choice instance.
+				// TODO: Price presentation, cost profit analysis and receipt generation
+				// TODO: Refactoring to decrease code duplication and 
+				//       adhere to single responsibility principle.
+				FoodServiceChoice foodChoice = foodServiceChoice.build();
+				break;
 
+			}
 		}
-	}
 
+	}
+	private void fixBeverage(Beverage beverage) {
+		foodServiceChoice.beverage(beverage);
+	}
 
 	private void fixLunchAndDinner(PassengerClass passengerClass2) {
 		displayLunchAndDinner(passengerClass2);
@@ -135,13 +162,13 @@ public class FlightManager {
 			case 6:
 				foodServiceChoice.lunchDinnerB(LunchAndDinnerBusiness.UNO_pepperoni_deep_dish_pizza);
 				break;
-				
+
 			}
 		}
 	}
 
 	private void displayLunchAndDinner(PassengerClass passengerClass2) {
-		
+
 		if(passengerClass2.equals(PassengerClass.ECONOMY)) {
 			System.out.println("Select your choice, we have:"
 					+ "\t\n 1)" + LunchAndDinnerEconomy.Smoked_Gouda_cheeseburger
@@ -186,10 +213,10 @@ public class FlightManager {
 			case 4:
 				foodServiceChoice.breakfastB(BreakfastBusiness.Fresh_start_breakfast);
 				break;
-				
+
 			}
 		}
-		
+
 	}
 
 	private void displayBreakfastMenu(PassengerClass passengerClass2) {

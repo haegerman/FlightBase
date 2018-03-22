@@ -39,6 +39,13 @@ public class Menu {
         System.out.print(":");
         return cin.nextInt();
     }
-
+    public int beverageSelectorMenu() {
+        System.out.println("Please enter your choice" +
+                "\n\t 0) Exit" +
+                "\n\t 1) Non Alcholic " +
+                "\n\t 2) Alcholic");
+        System.out.print(":");
+        return cin.nextInt();
+    }
 
 }
