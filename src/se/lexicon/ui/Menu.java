@@ -18,6 +18,7 @@ public class Menu {
                 "\n\t 0) Exit" +
                 "\n\t 1) Book a flight" +
                 "\n\t 2) Cansel a flight");
+        System.out.print(":");
     }
 
 
@@ -26,6 +27,7 @@ public class Menu {
                 "\n\t 0) Exit" +
                 "\n\t 1) Business class" +
                 "\n\t 2) Economy class");
+        System.out.print(":");
         return cin.nextInt();
     }
 
@@ -34,6 +36,7 @@ public class Menu {
                 "\n\t 0) Exit" +
                 "\n\t 1) Breakfast " +
                 "\n\t 2) Lunch and / or Dinner");
+        System.out.print(":");
         return cin.nextInt();
     }
 

@@ -1,5 +1,5 @@
 package se.lexicon.model.priceConstruction;
 
-public interface PassengerClass {
-	
+public enum PassengerClass {
+	BUSINESS, ECONOMY
 }
