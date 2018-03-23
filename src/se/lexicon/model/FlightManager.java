@@ -34,7 +34,7 @@ public class FlightManager {
 	
 	
 	public FlightManager(Menu menu) {
-		this.passenger  = new Passenger();
+		
 		this.menu = menu;
 		this.seatNumber = new ArrayList<>(10);
 		this.passengers = new ArrayList<>();
@@ -70,6 +70,7 @@ public class FlightManager {
         }
 	 */
 	public void bookFlight() {
+		this.passenger  = new Passenger();
 		Scanner sc = new Scanner(System.in);
 		if (!isFull) {
 			int choice = menu.seatSelectorMenu();
@@ -79,6 +80,7 @@ public class FlightManager {
 			case 1:
 				this.passengerClass = PassengerClass.BUSINESS;
 				fixBusinessClassSeat();
+				
 				passenger.setPassengerClass(this.passengerClass);
 				passenger.setSeatNumber(choice - 1);
 				this.passengers.add(choice -1 ,passenger);
@@ -337,7 +339,7 @@ public class FlightManager {
 		for (String name : reservation.keySet()) {
 			System.out.println("====================================");
 			System.out.println("Name: " + name);
-			System.out.println("Seat number: " + reservation.get(name) + 1);
+			System.out.println("Seat number: " + (reservation.get(name) + 1));
 			System.out.println("====================================");
 			
 		}
