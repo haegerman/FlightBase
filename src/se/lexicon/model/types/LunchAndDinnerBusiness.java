@@ -69,7 +69,7 @@ public enum LunchAndDinnerBusiness implements typeInterface{
         }
 	};
 
-	private double price;
+	private double price = 17.99; // Thai_style_chicken_sandwich
 
 
 	private LunchAndDinnerBusiness(final String price) {

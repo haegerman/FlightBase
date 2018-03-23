@@ -7,14 +7,14 @@ public class Passenger {
 
 	private PassengerClass passengerClass;
 	private FoodServiceChoice foodChoice;
-	private int setSeatNumber;
+	private int seatNumber;
 	private String fullName;
 
 	
 	public Passenger(PassengerClass passengerClass, FoodServiceChoice foodChoice, int setSeatNumber, String fullName) {
 		this.passengerClass = passengerClass;
 		this.foodChoice = foodChoice;
-		this.setSeatNumber = setSeatNumber;
+		this.seatNumber = setSeatNumber;
 		this.fullName = fullName;
 	}
 
@@ -32,8 +32,8 @@ public class Passenger {
 		return foodChoice;
 	}
 
-	public int getSetSeatNumber() {
-		return setSeatNumber;
+	public int getSeatNumber() {
+		return seatNumber;
 	}
 
 	public String getFullName() {
@@ -51,7 +51,7 @@ public class Passenger {
 	}
 
 	public void setSeatNumber(int seatNumber) {
-		this.setSeatNumber = seatNumber;
+		this.seatNumber = seatNumber;
 	}
 
 	public void setFullName(String fullName) {

@@ -21,15 +21,14 @@ public enum PassengerClass implements typeInterface{
         }
 	};
 
-	private double price;
+	private double price = 20_000;
 	
 	public void setPrice(double price) {
     	this.price  = price;
     }
 	
 	public double price() {
-		// TODO Auto-generated method stub
-		return 0;
+		return price;
 	}
 	private PassengerClass(final String price) {
         //this.price = Double.valueOf(price);

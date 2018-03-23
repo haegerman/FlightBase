@@ -24,16 +24,17 @@ public class FlightManager {
 	private boolean isFull;
 	private boolean isFullBusiness, isFullEconomy;
 	private Price price;
+	private int seat;
 	private Beverage beverage;
 	private FoodServiceChoice foodChoice1;
-	private Passenger p1;
+	private Passenger passenger;
 	private PassengerClass passengerClass;
 	private Map<String, Integer> reservation; // Name and seat number NOTE: price is related to seat no
 	private Map <Integer,FoodServiceChoice> foodChoice;
 	
 	
 	public FlightManager(Menu menu) {
-		this.p1  = new Passenger();
+		this.passenger  = new Passenger();
 		this.menu = menu;
 		this.seatNumber = new ArrayList<>(10);
 		passengers = new ArrayList<>();
@@ -42,6 +43,7 @@ public class FlightManager {
 
 		for (int i = 0; i < last; i++ ) {
 			seatNumber.add(i, Boolean.FALSE);
+			passengers.add(new Passenger());
 		}
 
 		this.isFull = false;
@@ -77,14 +79,18 @@ public class FlightManager {
 			case 1:
 				this.passengerClass = PassengerClass.BUSINESS;
 				fixBusinessClassSeat();
-				p1.setPassengerClass(this.passengerClass);
+				passenger.setPassengerClass(this.passengerClass);
+				passenger.setSeatNumber(choice - 1);
+				passengers.add(choice -1 ,passenger);
 				break;
 			case 2:
 				this.passengerClass = PassengerClass.ECONOMY;
 				fixEconomyClassSeat();
-				p1.setPassengerClass(this.passengerClass);
+				passenger.setPassengerClass(this.passengerClass);
+				seat = choice -1;
+				passenger.setSeatNumber(seat);
+				passengers.add(seat ,passenger);
 				break;
-
 			}
 			choice = menu.foodSelectorMenu();
 			switch (choice) {
@@ -111,33 +117,28 @@ public class FlightManager {
 			case 0:
 				System.exit(choice);
 			case 1:
-				//String type = sc1.nextLine();
-				//fixBeverage(beverage.setType(type)));
 				fixBeverage(beverage.NON_ALCHOLIC_BEVERAGE);
 				System.out.println("Will you have alcholic drinc? yes/no");
 				String choise = sc1.nextLine();
 				if(choise.equals("yes"))
 					fixBeverage(Beverage.ALCHOLIC);
+				
 				break;
+				
 			case 2:
 				fixLunchAndDinner(passengerClass);
-				//After adding Breakfast dinner and lunch choices
-				//Build the whole food choice instance.
-				// TODO: Price presentation, cost profit analysis and receipt generation
-				// TODO: Refactoring to decrease code duplication and 
-				//       adhere to single responsibility principle.
-				foodChoice1 = foodServiceChoice.build();
-				
-				p1.setFoodChoice(foodChoice1);
-				passengers.add(p1);
+
 				break;
 
 			}
+			foodChoice1 = foodServiceChoice.build();
+			passengers.get(seat).setFoodChoice(foodChoice1);
 		}
 
 	}
 	private void fixBeverage(Beverage beverage) {
 		foodServiceChoice.beverage(beverage);
+		foodChoice1 = foodServiceChoice.build();
 	}
 
 	private void fixLunchAndDinner(PassengerClass passengerClass2) {
@@ -177,6 +178,7 @@ public class FlightManager {
 				break;
 
 			}
+			foodChoice1 = foodServiceChoice.build();
 		}
 	}
 
@@ -228,6 +230,7 @@ public class FlightManager {
 				break;
 
 			}
+			foodChoice1 = foodServiceChoice.build();
 		}
 		
 	}
@@ -264,10 +267,10 @@ public class FlightManager {
 			int choice = sc.nextInt();
 			if(counter > choice){
 				//========================== --choice
-				seatNumber.add(choice, true);
-				p1.setSeatNumber(choice);
-				reservation.put(fullName, choice);
-				p1.setFullName(fullName);
+				seatNumber.add(choice - 1, true);
+				passenger.setSeatNumber(choice - 1);
+				reservation.put(fullName, choice - 1);
+				passenger.setFullName(fullName);
 			}
 
 			else {
@@ -301,10 +304,10 @@ public class FlightManager {
 			int choice = sc.nextInt();
 			if(counter > choice){
 				
-				seatNumber.add(choice, true);
-				p1.setSeatNumber(choice);
-				reservation.put(fullName, choice);
-				p1.setFullName(fullName);
+				seatNumber.add((choice - 1), true);
+				passenger.setSeatNumber((choice-1));
+				reservation.put(fullName, (choice-1));
+				passenger.setFullName(fullName);
 			}else {
 				isFullEconomy = true;
 				System.out.println("Sorry no available seat: ");
@@ -320,6 +323,8 @@ public class FlightManager {
 		String name = sc.nextLine();
 		System.out.println("");
 		if (reservation.containsKey(name)) {
+			int index = reservation.get(name);
+			passengers.remove(index);
 			reservation.remove(name);
 		}else {
 			System.out.println("There is no passenger with this name.");
@@ -332,7 +337,7 @@ public class FlightManager {
 		for (String name : reservation.keySet()) {
 			System.out.println("====================================");
 			System.out.println("Name: " + name);
-			System.out.println("Seat number: " + reservation.get(name));
+			System.out.println("Seat number: " + reservation.get(name) + 1);
 			System.out.println("====================================");
 			
 		}
@@ -344,7 +349,7 @@ public class FlightManager {
 		System.out.println("====================================");
 		for (Passenger passenger : this.passengers) {
 			total +=passenger.getTotalPrice();
-			System.out.println(" Seat number: " + passenger.getSetSeatNumber());
+			System.out.println(" Seat number: " + passenger.getSeatNumber());
 			System.out.println(" Price : " + passenger.getTotalPrice());
 		}
 		System.out.println("====================================");

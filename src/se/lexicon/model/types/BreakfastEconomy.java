@@ -21,7 +21,7 @@ public enum BreakfastEconomy {
         	return this.price  = price;
         }
     };
-    private double price;
+    private double price = 9.99;//Sourdough_breakfast_sandwich
 
 
 
@@ -31,8 +31,7 @@ public enum BreakfastEconomy {
 
 
 	public double getPrice() {
-		
-		return this.price;
+		return price();
 	}
 
 
@@ -41,5 +40,5 @@ public enum BreakfastEconomy {
 	}
 
 
-	public double price(){ return price;}
+	public double price(){ return this.price;}
 }

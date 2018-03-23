@@ -3,7 +3,7 @@ package se.lexicon.model.types;
 public enum BreakfastBusiness implements typeInterface{
 
     Sourdough_breakfast_sandwich("9.99") {
-    	private double price = 99.99;
+    	private double price = 9.99;
         @Override
         public double price() {
             return price;
@@ -47,7 +47,7 @@ public enum BreakfastBusiness implements typeInterface{
         }
     };
 
-    private double price;
+    private double price = 12.59;//Default choice Southwestern_style_omelet 
 
 
 
@@ -58,5 +58,10 @@ public enum BreakfastBusiness implements typeInterface{
     public void setPrice(double price) {
     	this.price  = price;
     }
-    public double price(){ return price;}
+    //public double price(){ return price;}
+
+	public double getPrice() {
+		return price();
+	}
+	public double price(){ return this.price;}
 }

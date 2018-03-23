@@ -24,7 +24,7 @@ public enum LunchAndDinnerEconomy {
         }
 	};
 	
-	private double price;
+	private double price = 15.88;//Smoked_Gouda_cheeseburger
 
 
 	private LunchAndDinnerEconomy(final String price) {
