@@ -26,7 +26,7 @@ public class FlightManager {
 	Beverage beverage;
 	private PassengerClass passengerClass;
 	private Map<String, Integer> reservation; // Name and seat number NOTE: price is related to seat no
-
+	private Map <Integer,FoodServiceChoice> foodChoice;
 	public FlightManager(Menu menu) {
 		this.menu = menu;
 		this.seatNumber = new ArrayList<>(10);
@@ -91,7 +91,7 @@ public class FlightManager {
 			case 2:
 				fixLunchAndDinner(passengerClass);
 
-				FoodServiceChoice foodChoice = foodServiceChoice.build();
+				//FoodServiceChoice foodChoice = foodServiceChoice.build();
 				break;
 
 			}
@@ -116,7 +116,9 @@ public class FlightManager {
 				// TODO: Price presentation, cost profit analysis and receipt generation
 				// TODO: Refactoring to decrease code duplication and 
 				//       adhere to single responsibility principle.
-				FoodServiceChoice foodChoice = foodServiceChoice.build();
+				FoodServiceChoice foodChoice1 = foodServiceChoice.build();
+				Passenger p1 = new Passenger();
+				p1.setFoodChoice(foodChoice1);
 				break;
 
 			}
@@ -316,5 +318,9 @@ public class FlightManager {
 			System.out.println("Seat number: " + reservation.get(name));
 			System.out.println("====================================");
 		}
+	}
+
+	public void displayFinancialStatment() {
+		
 	}
 }

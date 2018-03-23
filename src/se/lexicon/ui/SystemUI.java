@@ -47,10 +47,10 @@ public class SystemUI {
 							manager.displayReservation();
 							isRunning = true;
 							break;
-//						case "4":
-//							manager.displayFinancialStatment();
-//							isRunning = true;
-//							break;
+					 case "4":
+					 manager.displayFinancialStatment();
+					 isRunning = true;
+											break;
 						default:
 							System.out.println(keyboard + " is not a valid option. Please try again.");
 
