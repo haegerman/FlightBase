@@ -1,6 +1,6 @@
 package se.lexicon.model.types;
 
-public enum LunchAndDinnerBusiness implements FoodTypeInterface{
+public enum LunchAndDinnerBusiness implements typeInterface{
 
 	UNO_pepperoni_deep_dish_pizza("12.99") {
 		private double price = 12.99;

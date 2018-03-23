@@ -19,17 +19,24 @@ public class FlightManager {
 
 	Menu menu = new Menu();
 	private ArrayList<Boolean> seatNumber;
-	FoodServiceChoice.ChoiceBuilder foodServiceChoice = new FoodServiceChoice.ChoiceBuilder();
+	private ArrayList<Passenger> passengers;
+	private FoodServiceChoice.ChoiceBuilder foodServiceChoice = new FoodServiceChoice.ChoiceBuilder();
 	private boolean isFull;
 	private boolean isFullBusiness, isFullEconomy;
 	private Price price;
-	Beverage beverage;
+	private Beverage beverage;
+	private FoodServiceChoice foodChoice1;
+	private Passenger p1;
 	private PassengerClass passengerClass;
 	private Map<String, Integer> reservation; // Name and seat number NOTE: price is related to seat no
 	private Map <Integer,FoodServiceChoice> foodChoice;
+	
+	
 	public FlightManager(Menu menu) {
+		this.p1  = new Passenger();
 		this.menu = menu;
 		this.seatNumber = new ArrayList<>(10);
+		passengers = new ArrayList<>();
 		//int last = seatNumber.size();
 		int last = 10;
 
@@ -70,10 +77,12 @@ public class FlightManager {
 			case 1:
 				this.passengerClass = PassengerClass.BUSINESS;
 				fixBusinessClassSeat();
+				p1.setPassengerClass(this.passengerClass);
 				break;
 			case 2:
 				this.passengerClass = PassengerClass.ECONOMY;
 				fixEconomyClassSeat();
+				p1.setPassengerClass(this.passengerClass);
 				break;
 
 			}
@@ -83,6 +92,7 @@ public class FlightManager {
 				System.exit(choice);
 			case 1:
 				fixBreakfast(passengerClass);
+				
 				System.out.println("Will you choose dinner and/or lunch? yes/no");
 				String choise = sc.nextLine();
 				if(choise.equals(choise))
@@ -116,9 +126,10 @@ public class FlightManager {
 				// TODO: Price presentation, cost profit analysis and receipt generation
 				// TODO: Refactoring to decrease code duplication and 
 				//       adhere to single responsibility principle.
-				FoodServiceChoice foodChoice1 = foodServiceChoice.build();
-				Passenger p1 = new Passenger();
+				foodChoice1 = foodServiceChoice.build();
+				
 				p1.setFoodChoice(foodChoice1);
+				passengers.add(p1);
 				break;
 
 			}
@@ -218,7 +229,7 @@ public class FlightManager {
 
 			}
 		}
-
+		
 	}
 
 	private void displayBreakfastMenu(PassengerClass passengerClass2) {
@@ -250,10 +261,13 @@ public class FlightManager {
 				++counter;  
 			}
 			System.out.print("\n\t:");
-			if(--counter < 5){
-				int choice = sc.nextInt();
-				seatNumber.add(--choice, true);
+			int choice = sc.nextInt();
+			if(counter > choice){
+				//========================== --choice
+				seatNumber.add(choice, true);
+				p1.setSeatNumber(choice);
 				reservation.put(fullName, choice);
+				p1.setFullName(fullName);
 			}
 
 			else {
@@ -270,7 +284,7 @@ public class FlightManager {
 
 	public void fixEconomyClassSeat(){
 		Scanner sc = new Scanner(System.in);
-		int counter = 0;
+		int counter = 5;
 		String fullName;
 
 		if (!isFullEconomy) {
@@ -284,15 +298,18 @@ public class FlightManager {
 				++counter;  
 			}
 			System.out.print("\n\t:");
-			if(--counter < 10){
-				int choice = sc.nextInt();
-				seatNumber.add(--choice, true);
+			int choice = sc.nextInt();
+			if(counter > choice){
+				
+				seatNumber.add(choice, true);
+				p1.setSeatNumber(choice);
 				reservation.put(fullName, choice);
+				p1.setFullName(fullName);
 			}else {
 				isFullEconomy = true;
 				System.out.println("Sorry no available seat: ");
 			}
-			sc.close();
+			//sc.close();
 		}
 	}
 
@@ -317,10 +334,27 @@ public class FlightManager {
 			System.out.println("Name: " + name);
 			System.out.println("Seat number: " + reservation.get(name));
 			System.out.println("====================================");
+			
 		}
 	}
 
 	public void displayFinancialStatment() {
-		
+		double total, directCost, profit;
+		total = directCost = profit = 0;
+		System.out.println("====================================");
+		for (Passenger passenger : this.passengers) {
+			total +=passenger.getTotalPrice();
+			System.out.println(" Seat number: " + passenger.getSetSeatNumber());
+			System.out.println(" Price : " + passenger.getTotalPrice());
+		}
+		System.out.println("====================================");
+		System.out.println("Grand total : " + total);
+		System.out.println("====================================");
+		directCost = 0.6 * total;
+		System.out.println("Cost encurred by the company : " + directCost);
+		System.out.println("====================================");
+		profit = 0.4 * directCost;
+		System.out.println("Profit earned by the company : " + profit);
+		System.out.println("====================================");
 	}
 }

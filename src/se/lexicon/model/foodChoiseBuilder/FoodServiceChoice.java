@@ -15,6 +15,7 @@ public class FoodServiceChoice {
 		private LunchAndDinnerEconomy lunchAndDinnerE;
 		private Beverage beverage;
 
+		
 		public ChoiceBuilder() {
 		}
 		
@@ -77,5 +78,9 @@ public class FoodServiceChoice {
 		return lunchAndDinnerE;
 	}
 	public Beverage getBeverage() { return beverage;}
+
+	public double price() {
+		return this.beverage.price() + this.breakfastB.price() + this.breakfastE.price() + this.lunchAndDinnerB.price() + this.lunchAndDinnerE.price();
+	}
 
 }

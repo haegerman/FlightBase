@@ -1,6 +1,6 @@
 package se.lexicon.model.types;
 
-public enum BreakfastBusiness implements FoodTypeInterface{
+public enum BreakfastBusiness implements typeInterface{
 
     Sourdough_breakfast_sandwich("9.99") {
     	private double price = 99.99;
