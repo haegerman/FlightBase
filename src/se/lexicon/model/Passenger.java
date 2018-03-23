@@ -59,7 +59,8 @@ public class Passenger {
 	}
 
 	public double getTotalPrice() {
-		return this.foodChoice.price() + this.passengerClass.price();
+		return (this.foodChoice.price() 
+				+ this.passengerClass.price());
 	}
 
 }

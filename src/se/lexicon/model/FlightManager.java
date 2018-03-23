@@ -37,13 +37,13 @@ public class FlightManager {
 		this.passenger  = new Passenger();
 		this.menu = menu;
 		this.seatNumber = new ArrayList<>(10);
-		passengers = new ArrayList<>();
+		this.passengers = new ArrayList<>();
 		//int last = seatNumber.size();
 		int last = 10;
 
 		for (int i = 0; i < last; i++ ) {
 			seatNumber.add(i, Boolean.FALSE);
-			passengers.add(new Passenger());
+			//passengers.add(new Passenger());
 		}
 
 		this.isFull = false;
@@ -81,7 +81,7 @@ public class FlightManager {
 				fixBusinessClassSeat();
 				passenger.setPassengerClass(this.passengerClass);
 				passenger.setSeatNumber(choice - 1);
-				passengers.add(choice -1 ,passenger);
+				this.passengers.add(choice -1 ,passenger);
 				break;
 			case 2:
 				this.passengerClass = PassengerClass.ECONOMY;
@@ -89,7 +89,7 @@ public class FlightManager {
 				passenger.setPassengerClass(this.passengerClass);
 				seat = choice -1;
 				passenger.setSeatNumber(seat);
-				passengers.add(seat ,passenger);
+				this.passengers.add(seat ,passenger);
 				break;
 			}
 			choice = menu.foodSelectorMenu();
@@ -132,13 +132,13 @@ public class FlightManager {
 
 			}
 			foodChoice1 = foodServiceChoice.build();
-			passengers.get(seat).setFoodChoice(foodChoice1);
+			this.passengers.get(seat).setFoodChoice(foodChoice1);
 		}
 
 	}
 	private void fixBeverage(Beverage beverage) {
 		foodServiceChoice.beverage(beverage);
-		foodChoice1 = foodServiceChoice.build();
+		//foodChoice1 = foodServiceChoice.build();
 	}
 
 	private void fixLunchAndDinner(PassengerClass passengerClass2) {
@@ -346,11 +346,17 @@ public class FlightManager {
 	public void displayFinancialStatment() {
 		double total, directCost, profit;
 		total = directCost = profit = 0;
+		for (Passenger passenger : this.passengers) {
+			System.out.println(passenger.getFullName());
+		}
 		System.out.println("====================================");
 		for (Passenger passenger : this.passengers) {
-			total +=passenger.getTotalPrice();
-			System.out.println(" Seat number: " + passenger.getSeatNumber());
-			System.out.println(" Price : " + passenger.getTotalPrice());
+			if (passenger.getSeatNumber() < 10 && passenger.getSeatNumber()>0) {
+				total +=passenger.getTotalPrice();
+				System.out.println(" Seat number: " + passenger.getSeatNumber());
+				System.out.println(" Price : " + passenger.getTotalPrice());
+			}
+			
 		}
 		System.out.println("====================================");
 		System.out.println("Grand total : " + total);

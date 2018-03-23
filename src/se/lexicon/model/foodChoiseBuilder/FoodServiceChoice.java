@@ -80,7 +80,11 @@ public class FoodServiceChoice {
 	public Beverage getBeverage() { return beverage;}
 
 	public double price() {
-		return this.beverage.price() + this.breakfastB.getPrice() + this.breakfastE.getPrice() + this.lunchAndDinnerB.price() + this.lunchAndDinnerE.price();
+		return (this.beverage.price() 
+				+ this.breakfastB.getPrice() 
+				+ this.breakfastE.getPrice() 
+				+ this.lunchAndDinnerB.price() 
+				+ this.lunchAndDinnerE.price());
 	}
 
 }
