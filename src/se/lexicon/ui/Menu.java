@@ -17,7 +17,9 @@ public class Menu {
         System.out.println("Please enter your choice" +
                 "\n\t 0) Exit" +
                 "\n\t 1) Book a flight" +
-                "\n\t 2) Cansel a flight");
+                "\n\t 2) Cancel a flight" +
+                "\n\t 3) Display reservation" +
+                "\n\t 4) Display financial statment");
         System.out.print(":");
     }
 

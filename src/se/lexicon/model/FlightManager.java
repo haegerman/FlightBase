@@ -293,4 +293,28 @@ public class FlightManager {
 			sc.close();
 		}
 	}
+
+	public void calncelFlight() {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Please enter the name of the passenger:");
+		String name = sc.nextLine();
+		System.out.println("");
+		if (reservation.containsKey(name)) {
+			reservation.remove(name);
+		}else {
+			System.out.println("There is no passenger with this name.");
+		}
+		
+		//sc.close();
+	}
+
+	public void displayReservation() {
+		for (String name : reservation.keySet()) {
+			System.out.println("====================================");
+			System.out.println("Name: " + name);
+			System.out.println("Seat number: " + reservation.get(name));
+			System.out.println("====================================");
+		}
+	}
 }

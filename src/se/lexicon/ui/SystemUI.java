@@ -38,7 +38,19 @@ public class SystemUI {
 							manager.bookFlight();
 							isRunning = true;
 							break;
+						case "2":
+							manager.calncelFlight();
+							isRunning = true;
+							break;
 
+						case "3":
+							manager.displayReservation();
+							isRunning = true;
+							break;
+//						case "4":
+//							manager.displayFinancialStatment();
+//							isRunning = true;
+//							break;
 						default:
 							System.out.println(keyboard + " is not a valid option. Please try again.");
 
